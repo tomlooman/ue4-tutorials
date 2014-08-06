@@ -1,0 +1,6 @@
+ItemID,DisplayName,Weight,MaxDurability,Category,Description
+1,Apple,0.1,10,Consumable,Consumable to restore a bit of condition.
+2,Pistol,5,100,Weapon,Durable 1911 pistol.
+3,Shirt,2,50,Clothing,Worn shirt. Can be torn into rags.
+4,Helmet,10,100,Clothing,Bike helmet. Hide your idenity or soften the blow of a blunt weapon
+5,Water Bottle,0.2,10,Container,Empty container. Can be filled with water or other liquids.
