@@ -6,7 +6,7 @@
 ATutorialsHUD::ATutorialsHUD(const class FPostConstructInitializeProperties& PCIP) : Super(PCIP)
 {
 	// Set the crosshair texture
-	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/Textures/Crosshair"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/Textures/T_Crosshair_D"));
 	CrosshairTex = CrosshiarTexObj.Object;
 }
 

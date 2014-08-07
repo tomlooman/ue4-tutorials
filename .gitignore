@@ -4,3 +4,4 @@ Intermediate
 
 *.suo
 *.opensdf
+/Tutorials/Config/DefaultEditorUserSettings.ini
