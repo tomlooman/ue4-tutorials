@@ -9,12 +9,15 @@ class AUsableActor : public AStaticMeshActor
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnUsed(ACharacter* character);
+	// The functions return a boolean to force Unreal to recognize it as Functions instead of Events so they can be overriden in child classes.
+	// This is an issue that will be fixed in a future release of Unreal.
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void StartFocusItem();
+	bool OnUsed(ACharacter* character);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void EndFocusItem();
+	bool StartFocusItem();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	bool EndFocusItem();
 };
