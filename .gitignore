@@ -5,3 +5,5 @@ Intermediate
 *.suo
 *.opensdf
 /Tutorials/Config/DefaultEditorUserSettings.ini
+/Tutorials/Tutorials.sln
+/Tutorials/*.ecd
