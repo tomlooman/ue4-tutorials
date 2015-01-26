@@ -10,11 +10,11 @@ class ATutorialsProjectile : public AActor
 
 	/** Sphere collision component */
 	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
-	TSubobjectPtr<USphereComponent> CollisionComp;
+	USphereComponent* CollisionComp;
 
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Movement)
-	TSubobjectPtr<class UProjectileMovementComponent> ProjectileMovement;
+	class UProjectileMovementComponent* ProjectileMovement;
 
 	/** called when projectile hits something */
 	UFUNCTION()

@@ -6,11 +6,11 @@
 #include "TutorialsProjectile.h"
 
 
-AUsableCppCharacter::AUsableCppCharacter(const class FPostConstructInitializeProperties& PCIP)
+AUsableCppCharacter::AUsableCppCharacter(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	// Set size for collision capsule
-	CapsuleComponent->InitCapsuleSize(42.f, 96.0f);
+	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
@@ -18,7 +18,7 @@ AUsableCppCharacter::AUsableCppCharacter(const class FPostConstructInitializePro
 
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = PCIP.CreateDefaultSubobject<UCameraComponent>(this, TEXT("FirstPersonCamera"));
-	FirstPersonCameraComponent->AttachParent = CapsuleComponent;
+	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
 	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 64.f); // Position the camera
 
 	// Default offset from the character location for projectiles to spawn

@@ -3,7 +3,7 @@
 #include "Tutorials.h"
 #include "TutorialsHUD.h"
 
-ATutorialsHUD::ATutorialsHUD(const class FPostConstructInitializeProperties& PCIP) : Super(PCIP)
+ATutorialsHUD::ATutorialsHUD(const class FObjectInitializer& PCIP) : Super(PCIP)
 {
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/Textures/T_Crosshair_D"));

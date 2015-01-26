@@ -4,7 +4,7 @@
 #include "TutorialsProjectile.h"
 
 
-ATutorialsProjectile::ATutorialsProjectile(const class FPostConstructInitializeProperties& PCIP) 
+ATutorialsProjectile::ATutorialsProjectile(const class FObjectInitializer& PCIP) 
 	: Super(PCIP)
 {
 	// Use a sphere as a simple collision representation

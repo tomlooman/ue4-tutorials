@@ -4,7 +4,7 @@
 #include "TutorialsGameMode.h"
 #include "TutorialsHUD.h"
 
-ATutorialsGameMode::ATutorialsGameMode(const class FPostConstructInitializeProperties& PCIP)
+ATutorialsGameMode::ATutorialsGameMode(const class FObjectInitializer& PCIP)
 	: Super(PCIP)
 {
 	// set default pawn class to our Blueprinted character
