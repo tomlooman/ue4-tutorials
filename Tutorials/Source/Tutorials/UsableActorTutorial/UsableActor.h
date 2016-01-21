@@ -5,19 +5,20 @@
 
 
 UCLASS()
-class AUsableActor : public AStaticMeshActor
+class AUsableActor : public AActor
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
-	// The functions return a boolean to force Unreal to recognize it as Functions instead of Events so they can be overriden in child classes.
-	// This is an issue that will be fixed in a future release of Unreal.
+public:
 
-	UFUNCTION(BlueprintImplementableEvent)
-	bool OnUsed(ACharacter* character);
+	// The functions return a boolean to force Unreal to recognize it as Functions instead of Events so they can be overridden in Blueprint child classes.
 
 	UFUNCTION(BlueprintImplementableEvent)
-	bool StartFocusItem();
+	bool OnUsed(ACharacter* Character);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	bool EndFocusItem();
+	bool OnBeginFocus();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	bool OnEndFocus();
 };

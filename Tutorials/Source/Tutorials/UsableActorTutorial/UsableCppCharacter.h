@@ -11,7 +11,11 @@
 UCLASS()
 class TUTORIALS_API AUsableCppCharacter : public ACharacter
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+protected:
+
+	AUsableCppCharacter();
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -31,27 +35,6 @@ class TUTORIALS_API AUsableCppCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
 
-	/** Gun muzzle's offset from the characters location */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	FVector GunOffset;
-
-	/** Projectile class to spawn */
-	UPROPERTY(EditDefaultsOnly, Category = Projectile)
-	TSubclassOf<class ATutorialsProjectile> ProjectileClass;
-
-	/** Sound to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	USoundBase* FireSound;
-
-	/** AnimMontage to play each time we fire */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	UAnimMontage* FireAnimation;
-
-protected:
-
-	/** Fires a projectile. */
-	void OnFire();
-
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
@@ -70,10 +53,7 @@ protected:
 	*/
 	void LookUpAtRate(float Rate);
 
-protected:
-	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-	// End of APawn interface
 
 	/** Get actor derived from UsableActor currently looked at by the player */
 	class AUsableActor* GetUsableInView();
@@ -91,6 +71,6 @@ protected:
 public:
 
 	/** Use the actor currently in view (if derived from UsableActor) */
-	UFUNCTION(BlueprintCallable, WithValidation, Server, Reliable, Category = PlayerAbility)
+	UFUNCTION(BlueprintCallable, WithValidation, Server, Reliable, Category = "Pawn")
 	virtual void Use();
 };
