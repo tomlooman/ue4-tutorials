@@ -5,21 +5,10 @@ using System.Collections.Generic;
 
 public class TutorialsEditorTarget : TargetRules
 {
-	public TutorialsEditorTarget(TargetInfo Target)
+	public TutorialsEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-	}
 
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.Add("Tutorials");
+        ExtraModuleNames.Add("Tutorials");
 	}
 }
