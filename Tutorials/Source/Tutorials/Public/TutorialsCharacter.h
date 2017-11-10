@@ -1,12 +1,18 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 #pragma once
 
+#include "GameFramework/Character.h"
+
 #include "TutorialsCharacter.generated.h"
 
 UCLASS(config=Game)
-class ATutorialsCharacter : public ACharacter
+class TUTORIALS_API ATutorialsCharacter : public ACharacter
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+public:
+
+	ATutorialsCharacter(const class FObjectInitializer& PCIP);
 
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
@@ -41,9 +47,6 @@ class ATutorialsCharacter : public ACharacter
 	UAnimMontage* FireAnimation;
 
 protected:
-
-	/** Handler for a touch input beginning. */
-	void TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location);
 
 	/** Fires a projectile. */
 	void OnFire();

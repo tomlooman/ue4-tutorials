@@ -1,8 +1,7 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "Tutorials.h"
 #include "TutorialsProjectile.h"
-
+#include "Tutorials.h"
 
 ATutorialsProjectile::ATutorialsProjectile(const class FObjectInitializer& PCIP) 
 	: Super(PCIP)
@@ -26,7 +25,8 @@ ATutorialsProjectile::ATutorialsProjectile(const class FObjectInitializer& PCIP)
 	InitialLifeSpan = 3.0f;
 }
 
-void ATutorialsProjectile::OnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+//(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ATutorialsProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())

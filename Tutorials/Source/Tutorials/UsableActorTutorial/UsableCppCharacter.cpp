@@ -1,10 +1,10 @@
 
 
-#include "Tutorials.h"
 #include "UsableCppCharacter.h"
+#include "Tutorials.h"
 #include "UsableActor.h"
 #include "TutorialsProjectile.h"
-
+#include "Engine/World.h"
 
 AUsableCppCharacter::AUsableCppCharacter()
 	: Super()
@@ -18,13 +18,13 @@ AUsableCppCharacter::AUsableCppCharacter()
 
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
-	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
+	FirstPersonCameraComponent->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 64.f); // Position the camera
 
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);			// only the owning player will see this mesh
-	Mesh1P->AttachParent = FirstPersonCameraComponent;
+	Mesh1P->AttachToComponent(FirstPersonCameraComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	Mesh1P->RelativeLocation = FVector(0.f, 0.f, -150.f);
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
@@ -48,9 +48,9 @@ AUsableActor* AUsableCppCharacter::GetUsableInView()
 	}
 
 	Controller->GetPlayerViewPoint(camLoc, camRot);
-	const FVector start_trace = camLoc;
+	const FVector StartTrace = camLoc;
 	const FVector direction = camRot.Vector();
-	const FVector end_trace = start_trace + (direction * MaxUseDistance);
+	const FVector EndTrace = StartTrace + (direction * MaxUseDistance);
 
 	FCollisionQueryParams TraceParams(FName(TEXT("")), true, this);
 	TraceParams.bTraceAsyncScene = true;
@@ -58,7 +58,7 @@ AUsableActor* AUsableCppCharacter::GetUsableInView()
 	TraceParams.bTraceComplex = true;
 
 	FHitResult Hit(ForceInit);
-	GetWorld()->LineTraceSingle(Hit, start_trace, end_trace, COLLISION_PROJECTILE, TraceParams);
+	GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, ECC_Visibility, TraceParams);
 
 	//DrawDebugLine(GetWorld(), start_trace, end_trace, FColor(255, 255, 255), false, 1);
 

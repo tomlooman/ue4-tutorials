@@ -1,7 +1,7 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "Tutorials.h"
 #include "TutorialsCharacter.h"
+#include "Tutorials.h"
 #include "TutorialsProjectile.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,9 @@ ATutorialsCharacter::ATutorialsCharacter(const class FObjectInitializer& PCIP)
 
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = PCIP.CreateDefaultSubobject<UCameraComponent>(this, TEXT("FirstPersonCamera"));
-	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
+	GetCapsuleComponent()->AttachToComponent(FirstPersonCameraComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//FirstPersonCameraComponent->AttachToComponent(this, GetCapsuleComponent());
+
 	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 64.f); // Position the camera
 
 	// Default offset from the character location for projectiles to spawn
@@ -28,7 +30,7 @@ ATutorialsCharacter::ATutorialsCharacter(const class FObjectInitializer& PCIP)
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	Mesh1P = PCIP.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);			// only the owning player will see this mesh
-	Mesh1P->AttachParent = FirstPersonCameraComponent;
+	Mesh1P->AttachToComponent(FirstPersonCameraComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	Mesh1P->RelativeLocation = FVector(0.f, 0.f, -150.f);
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
@@ -48,7 +50,6 @@ void ATutorialsCharacter::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	
 	InputComponent->BindAction("Fire", IE_Pressed, this, &ATutorialsCharacter::OnFire);
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATutorialsCharacter::TouchStarted);
 
 	InputComponent->BindAxis("MoveForward", this, &ATutorialsCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ATutorialsCharacter::MoveRight);
@@ -96,15 +97,6 @@ void ATutorialsCharacter::OnFire()
 		}
 	}
 
-}
-
-void ATutorialsCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
-{
-	// only fire for first finger down
-	if (FingerIndex == 0)
-	{
-		OnFire();
-	}
 }
 
 void ATutorialsCharacter::MoveForward(float Value)

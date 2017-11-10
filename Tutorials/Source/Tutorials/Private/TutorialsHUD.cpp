@@ -1,9 +1,11 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "Tutorials.h"
 #include "TutorialsHUD.h"
+#include "Tutorials.h"
 
-ATutorialsHUD::ATutorialsHUD(const class FObjectInitializer& PCIP) : Super(PCIP)
+
+ATutorialsHUD::ATutorialsHUD(const class FObjectInitializer& PCIP):
+	Super(PCIP)
 {
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/Textures/T_Crosshair_D"));
