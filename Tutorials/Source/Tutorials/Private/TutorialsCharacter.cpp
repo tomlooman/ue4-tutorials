@@ -50,7 +50,6 @@ void ATutorialsCharacter::SetupPlayerInputComponent(class UInputComponent* Input
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	
 	InputComponent->BindAction("Fire", IE_Pressed, this, &ATutorialsCharacter::OnFire);
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ATutorialsCharacter::TouchStarted);
 
 	InputComponent->BindAxis("MoveForward", this, &ATutorialsCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ATutorialsCharacter::MoveRight);
@@ -98,15 +97,6 @@ void ATutorialsCharacter::OnFire()
 		}
 	}
 
-}
-
-void ATutorialsCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
-{
-	// only fire for first finger down
-	if (FingerIndex == 0)
-	{
-		OnFire();
-	}
 }
 
 void ATutorialsCharacter::MoveForward(float Value)

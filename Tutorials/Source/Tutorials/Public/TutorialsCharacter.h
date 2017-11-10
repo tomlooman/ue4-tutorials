@@ -48,9 +48,6 @@ public:
 
 protected:
 
-	/** Handler for a touch input beginning. */
-	void TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location);
-
 	/** Fires a projectile. */
 	void OnFire();
 

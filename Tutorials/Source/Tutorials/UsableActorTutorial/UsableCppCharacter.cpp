@@ -48,9 +48,9 @@ AUsableActor* AUsableCppCharacter::GetUsableInView()
 	}
 
 	Controller->GetPlayerViewPoint(camLoc, camRot);
-	const FVector start_trace = camLoc;
+	const FVector StartTrace = camLoc;
 	const FVector direction = camRot.Vector();
-	const FVector end_trace = start_trace + (direction * MaxUseDistance);
+	const FVector EndTrace = StartTrace + (direction * MaxUseDistance);
 
 	FCollisionQueryParams TraceParams(FName(TEXT("")), true, this);
 	TraceParams.bTraceAsyncScene = true;
@@ -58,7 +58,7 @@ AUsableActor* AUsableCppCharacter::GetUsableInView()
 	TraceParams.bTraceComplex = true;
 
 	FHitResult Hit(ForceInit);
-	ActorLineTraceSingle(Hit, start_trace, end_trace, COLLISION_PROJECTILE, TraceParams);
+	GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, ECC_Visibility, TraceParams);
 
 	//DrawDebugLine(GetWorld(), start_trace, end_trace, FColor(255, 255, 255), false, 1);
 
